@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prueba de la API de OpenAI</title>
+    <title>OpenAI API Test</title>
 </head>
 <body>
-    <h1>Prueba de la API de OpenAI</h1>
-    <button id="checkApiBtn">Comprobar API Key</button>
+    <h1>OpenAI API Test</h1>
+    <button id="checkApiBtn">Check API Key</button>
     <p id="response"></p>
 
     <script>
         document.getElementById('checkApiBtn').addEventListener('click', async () => {
             const responseElement = document.getElementById('response');
-            responseElement.textContent = 'Consultando la API...';
+            responseElement.textContent = 'Querying the API...';
 
             try {
                 const response = await fetch('http://localhost:3000/api/chat', {
@@ -21,7 +21,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ message: 'Dime un hecho interesante.' })
+                    body: JSON.stringify({ message: 'Tell me an interesting fact.' })
                 });
 
                 if (!response.ok) {

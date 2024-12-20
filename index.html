@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de la API de OpenAI</title>
+</head>
+<body>
+    <h1>Prueba de la API de OpenAI</h1>
+    <button id="checkApiBtn">Comprobar API Key</button>
+    <p id="response"></p>
+
+    <script>
+        document.getElementById('checkApiBtn').addEventListener('click', async () => {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = 'Consultando la API...';
+
+            try {
+                const response = await fetch('http://localhost:3000/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: 'Dime un hecho interesante.' })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                responseElement.textContent = data.choices[0].message.content || 'Respuesta recibida.';
+            } catch (error) {
+                responseElement.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
